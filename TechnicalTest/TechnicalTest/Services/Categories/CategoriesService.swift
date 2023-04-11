@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 
 class CategoriesService: CategoriesServiceProtocol {
 #warning("to remove and replace with DI")
@@ -14,28 +15,21 @@ class CategoriesService: CategoriesServiceProtocol {
     
     init() {}
     
-    func getCategories(_ completion: @escaping ([Category]?, Error?) -> Void) {
+    func getCategories() -> AnyPublisher<[Category], Error> {
         guard let url = URL(string: ApiConstants.baseURL + ApiConstants.Paths.categories.rawValue) else {
-            completion(nil, ApiConstants.ServerError.malformattedURL)
-            return
+            return Fail(error: ApiConstants.ServerError.malformattedURL).eraseToAnyPublisher()
         }
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        performRequest(request) { data, error  in
-            guard let data = data, let response = try? JSONDecoder().decode([Category].self, from: data) else {
-                completion(nil, error ?? ApiConstants.ServerError.noData)
-                return
-            }
-            completion(response, nil)
-        }
-    }
     
-    #warning("duplicated")
-    private func performRequest(_ request: URLRequest, completion: @escaping (Data?, Error?) -> Void) {
-        let session = URLSession(configuration: .default)
-        let dataTask = session.dataTask(with: request) { (data, _, error) in
-            completion(data, error)
-        }
-        dataTask.resume()
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .tryMap { output in
+                guard let response = output.response as? HTTPURLResponse, response.statusCode == 200 else {
+                    throw ApiConstants.ServerError.noData
+                }
+                return output.data
+            }
+            .decode(type: [Category].self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
     }
 }
+
+

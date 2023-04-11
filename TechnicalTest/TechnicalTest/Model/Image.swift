@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Image: Codable {
+struct Image: Codable, Hashable {
     let small: String?
     let thumb: String?
 }

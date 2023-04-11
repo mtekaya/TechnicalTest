@@ -6,7 +6,8 @@
 //
 
 import Foundation
+import Combine
 
 protocol AdsServiceProtocol {
-    func getAds(_ completion: @escaping ([Advertisement]?, Error?) -> Void)
+    func getAds() -> AnyPublisher<[Advertisement], Error>
 }

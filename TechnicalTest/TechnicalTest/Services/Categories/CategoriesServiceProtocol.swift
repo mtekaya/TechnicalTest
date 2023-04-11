@@ -7,7 +7,8 @@
 //
 
 import Foundation
+import Combine
 
 protocol CategoriesServiceProtocol {
-    func getCategories(_ completion: @escaping ([Category]?, Error?) -> Void)
+    func getCategories() -> AnyPublisher<[Category], Error>
 }

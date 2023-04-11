@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct Advertisement: Codable {
+struct Advertisement: Codable, Hashable {
     let id: Int
     let categoryID: Int
     let title, description: String
-    let price: Float
+    let price: Double
     let imagesURL: Image
     let creationDate: Date
     let isUrgent: Bool

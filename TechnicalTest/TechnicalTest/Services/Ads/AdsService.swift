@@ -6,37 +6,30 @@
 //
 
 import Foundation
-
+import Combine
 
 class AdsService: AdsServiceProtocol {
-        
+
     #warning("to remove and replace with DI")
     static let shared: AdsServiceProtocol = AdsService()
     
     init() {}
     
-    func getAds(_ completion: @escaping ([Advertisement]?, Error?) -> Void) {
+    func getAds() -> AnyPublisher<[Advertisement], Error> {
         guard let url = URL(string: ApiConstants.baseURL + ApiConstants.Paths.ads.rawValue) else {
-            completion(nil, ApiConstants.ServerError.malformattedURL)
-            return
+            return Fail(error: ApiConstants.ServerError.malformattedURL).eraseToAnyPublisher()
         }
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        performRequest(request) { data, error  in
-            guard let data = data, let response = try? JSONDecoder().decode([Advertisement].self, from: data) else {
-                completion(nil, error ?? ApiConstants.ServerError.noData)
-                return
+        var jsondecoder = JSONDecoder()
+        jsondecoder.dateDecodingStrategy = .iso8601
+        
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .tryMap { output in
+                guard let response = output.response as? HTTPURLResponse, response.statusCode == 200 else {
+                    throw ApiConstants.ServerError.noData
+                }
+                return output.data
             }
-            completion(response, nil)
-        }
-    }
-
-    
-    private func performRequest(_ request: URLRequest, completion: @escaping (Data?, Error?) -> Void) {
-        let session = URLSession(configuration: .default)
-        let dataTask = session.dataTask(with: request) { (data, _, error) in
-            completion(data, error)
-        }
-        dataTask.resume()
+            .decode(type: [Advertisement].self, decoder: jsondecoder)
+            .eraseToAnyPublisher()
     }
 }
