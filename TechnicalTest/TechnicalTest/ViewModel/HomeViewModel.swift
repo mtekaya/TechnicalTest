@@ -22,7 +22,7 @@ class HomeViewModel {
     private let diContainer: DIContainer
     let selectedCategory = CurrentValueSubject<Int?, Error>(nil)
     let sortByDateAscendant = CurrentValueSubject<Bool, Error>(false)
-
+    
     init(diContainer: DIContainer) {
         self.diContainer = diContainer
     }
@@ -31,15 +31,18 @@ class HomeViewModel {
         self.selectedCategory.send(selectedCategory)
     }
     
+    func getCategories() -> AnyPublisher<[Category], Error> {
+        diContainer.categoriesService
+            .getCategories()
+    }
+    
     func getData() -> AnyPublisher<[HomeCellData], Error> {
-        let categoriesPublisher = diContainer.categoriesService
-            .getCategories().share()
         
         let adsPublisher = diContainer.adsService
             .getAds().share()
         
         return Publishers.CombineLatest4(
-            categoriesPublisher,
+            getCategories(),
             adsPublisher,
             selectedCategory,
             sortByDateAscendant
