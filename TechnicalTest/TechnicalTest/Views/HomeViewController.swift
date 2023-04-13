@@ -8,18 +8,33 @@
 import UIKit
 import Combine
 
+protocol HomeViewProtocol: AnyObject {
+    func homeView(viewController: HomeViewController, didSelect advertisement: RichAdvertisement)
+}
+
 class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout {
-    typealias DataSource = UICollectionViewDiffableDataSource<Int, HomeCellData>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, HomeCellData>
+    typealias DataSource = UICollectionViewDiffableDataSource<Int, RichAdvertisement>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, RichAdvertisement>
+    
+    weak var delegate: HomeViewProtocol?
+    
+    private let collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = Theme.Color.backgroundColor
+        return collectionView
 
-    var collectionView: UICollectionView!
-    let cellId = "AdvertisementCell"
-    let homeViewModel: HomeViewModel
+    }()
+    private let cellId = "AdvertisementCell"
+    private let homeViewModel: HomeViewModelProtocol
     private var cancellables = Set<AnyCancellable>()
-
+    
+    private let activityIndicator = UIActivityIndicatorView.init(style: .large)
+    
     private lazy var dataSource = makeDataSource()
-
-    init(homeViewModel: HomeViewModel) {
+    
+    init(homeViewModel: HomeViewModelProtocol) {
         self.homeViewModel = homeViewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -30,66 +45,85 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     
     override func loadView() {
         super.loadView()
+        view.addSubview(collectionView)
+        view.addSubview(activityIndicator)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.itemSize = CGSize(width: view.frame.width, height: 120)
-
-        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        
-        collectionView.register(AdvertisementCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.backgroundColor = UIColor.white
-        self.view.addSubview(collectionView)
+        layout.sectionInset = .zero
+        layout.itemSize = getItemSize()
+        collectionView.setCollectionViewLayout(layout, animated: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+        loadData()
+    }
+    
+    private func setupView() {
+        view.backgroundColor = Theme.Color.backgroundColor
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "home.sort".localized(), style: .plain, target: self, action: #selector(sortTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "home.filter".localized(), style: .plain, target: self, action: #selector(filterTapped))
+        // setup collectionView
+        collectionView.register(AdvertisementCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.delegate = self
         collectionView.dataSource = dataSource
-        // Create an instance of UICollectionViewFlowLayout since you cant
-        // Initialize UICollectionView without a layout
+        collectionView.fit(view)
+        // setup activityIndicator
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicator.hidesWhenStopped = true
+
+
+    }
+    
+    private func loadData() {
+        activityIndicator.startAnimating()
         homeViewModel.getData()
             .receive(on: DispatchQueue.main)
-            .sink {_ in} receiveValue: { datas in
-            self.applySnapshot(datas)
-        }.store(in: &cancellables)
+            .sink {[weak self] _ in
+                self?.activityIndicator.stopAnimating()
 
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "sort", style: .plain, target: self, action: #selector(sortTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "filter", style: .plain, target: self, action: #selector(filterTapped))
-
+            } receiveValue: {[weak self] datas in
+                self?.activityIndicator.stopAnimating()
+                self?.applySnapshot(datas)
+            }.store(in: &cancellables)
     }
     
     private func makeDataSource() -> DataSource {
-      let dataSource = DataSource(
-        collectionView: collectionView,
-        cellProvider: { (collectionView, indexPath, advertissement) ->
-          UICollectionViewCell? in
-          let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "AdvertisementCell",
-            for: indexPath) as? AdvertisementCell
-            cell?.setupWith(advertissement)
-            return cell
-      })
-      return dataSource
+        let dataSource = DataSource(
+            collectionView: collectionView,
+            cellProvider: { (collectionView, indexPath, advertissement) ->
+                UICollectionViewCell? in
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: "AdvertisementCell",
+                    for: indexPath) as? AdvertisementCell
+                cell?.setupWith(advertissement)
+                return cell
+            })
+        return dataSource
     }
     
-    private func applySnapshot(_ data: [HomeCellData]) {
-      var snapshot = Snapshot()
-      snapshot.appendSections([0])
-      snapshot.appendItems(data)
-      dataSource.apply(snapshot, animatingDifferences: true)
+    private func applySnapshot(_ data: [RichAdvertisement]) {
+        var snapshot = Snapshot()
+        snapshot.appendSections([0])
+        snapshot.appendItems(data)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
     
-    @objc func filterTapped(sender: UIBarButtonItem) {
+    @objc private func filterTapped(sender: UIBarButtonItem) {
         homeViewModel.getCategories()
             .receive(on: DispatchQueue.main)
             .sink { _ in } receiveValue: { [weak self] categories in
                 guard let self else { return}
-                let alertController = UIAlertController(title: nil, message: "Catégorie", preferredStyle: .actionSheet)
-                
-                // show action sheet
+                let alertController = UIAlertController(title: nil, message: "home.category.label".localized(), preferredStyle: .actionSheet)
                 alertController.popoverPresentationController?.barButtonItem = sender
                 alertController.popoverPresentationController?.sourceView = self.view
-                let categoryAction = UIAlertAction(title: "Toutes les catégories", style: .default, handler: {
+                let categoryAction = UIAlertAction(title: "home.category.all".localized(), style: .default, handler: {
                     (alert: UIAlertAction!) -> Void in
                     self.homeViewModel.setcategory(selectedCategory: nil)
                     self.dismiss(animated: true, completion: nil)
@@ -103,7 +137,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout {
                     })
                     alertController.addAction(categoryAction)
                 }
-                let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: { _ in})
+                let cancelAction = UIAlertAction(title: "cancel".localized(), style: .cancel, handler: { _ in})
                 
                 alertController.addAction(cancelAction)
                 
@@ -111,28 +145,49 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout {
             }.store(in: &cancellables)
     }
     
-    @objc func sortTapped(sender: UIBarButtonItem) {
-        let alertController = UIAlertController(title: nil, message: "Date de création", preferredStyle: .actionSheet)
+    @objc private func sortTapped(sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: nil, message: "home.creation.date".localized(), preferredStyle: .actionSheet)
         
         // show action sheet
         alertController.popoverPresentationController?.barButtonItem = sender
         alertController.popoverPresentationController?.sourceView = self.view
-      
-        let ascendantAction = UIAlertAction(title: "Du plus ancien", style: .default, handler: { _ in
-            self.homeViewModel.sortByDateAscendant.send(true)
+        
+        let ascendantAction = UIAlertAction(title: "home.sort.oldest".localized(), style: .default, handler: { _ in
+            self.homeViewModel.setSortByDateAscendant(ascendant: true)
             self.dismiss(animated: true)
         })
-        let descendantAction = UIAlertAction(title: "Du plus récent", style: .default, handler: { _ in
-            self.homeViewModel.sortByDateAscendant.send(false)
+        let descendantAction = UIAlertAction(title: "home.sort.newest".localized(), style: .default, handler: { _ in
+            self.homeViewModel.setSortByDateAscendant(ascendant: false)
             self.dismiss(animated: true)
-
+            
         })
-        let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: { _ in})
+        let cancelAction = UIAlertAction(title: "cancel".localized(), style: .cancel, handler: { _ in})
         
         alertController.addAction(ascendantAction)
         alertController.addAction(descendantAction)
         alertController.addAction(cancelAction)
-
+        
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func getItemSize() -> CGSize {
+        let screenBounds = UIScreen.main.bounds
+        let width = screenBounds.width
+        let minWidth: CGFloat = 300
+        let margin: CGFloat = 16
+        let minItemWidthwithMargin = minWidth + margin * 2
+        let numberOfItem = Int(width / minItemWidthwithMargin)
+        let totalMargin: CGFloat = CGFloat(numberOfItem) * margin * 2
+        let calculatedWidth: CGFloat = (width - totalMargin) / CGFloat(numberOfItem)
+        return CGSizeMake(calculatedWidth, 120)
+    }
+}
+
+extension HomeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let advertisement = dataSource.itemIdentifier(for: indexPath) else {
+          return
+        }
+        delegate?.homeView(viewController: self, didSelect: advertisement)
     }
 }

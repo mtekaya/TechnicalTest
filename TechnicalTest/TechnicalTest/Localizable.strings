@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  TechnicalTest
+
+  Created by Marouene on 15/04/2023.
+  
+*/
+
+"home.filter" = "Filtre";
+"home.sort" = "Tri";
+"home.sort.newest" = "Du plus récent";
+"home.sort.oldest" = "Du plus ancien";
+"home.category.label" = "Catégorie";
+"home.category.all" = "Toutes les catégories";
+"cancel" = "Annuler";
+"home.creation.date" = "Date de création";
+"siret" = "Siret:";
+"detail.creation.date.label" = "Date de création:";
+

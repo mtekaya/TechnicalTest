@@ -9,17 +9,11 @@ import Foundation
 import Combine
 
 class AdsService: AdsServiceProtocol {
-
-    #warning("to remove and replace with DI")
-    static let shared: AdsServiceProtocol = AdsService()
-    
-    init() {}
-    
     func getAds() -> AnyPublisher<[Advertisement], Error> {
         guard let url = URL(string: ApiConstants.baseURL + ApiConstants.Paths.ads.rawValue) else {
             return Fail(error: ApiConstants.ServerError.malformattedURL).eraseToAnyPublisher()
         }
-        var jsondecoder = JSONDecoder()
+        let jsondecoder = JSONDecoder()
         jsondecoder.dateDecodingStrategy = .iso8601
         
         return URLSession.shared.dataTaskPublisher(for: url)

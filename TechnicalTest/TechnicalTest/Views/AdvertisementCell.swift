@@ -2,36 +2,39 @@
 //  AdvertisementCell.swift
 //  TechnicalTest
 //
-//  Created by compte temporaire on 11/04/2023.
+//  Created by Marouene on 11/04/2023.
 //
 
 import UIKit
 
 class AdvertisementCell: UICollectionViewCell {
-
+    
     override var reuseIdentifier: String {
         "AdvertisementCell"
     }
     
-    let adImageView: UIImageView = {
+    private let adImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = UIColor.white
-        imageView.image = .init(systemName: "light.beacon.max.fill")
-        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = Theme.Color.backgroundColor
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = Theme.Layout.cornerRadius
+        imageView.layer.borderWidth = Theme.Layout.borderWidth
+        imageView.layer.borderColor = Theme.Color.quaternaryColor.cgColor
         return imageView
     }()
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .body)
-        label.numberOfLines = 3
+        label.numberOfLines = 2
         label.textColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let priceLabel: UILabel = {
+    private let priceLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.darkGray
         label.font = .preferredFont(forTextStyle: .headline)
@@ -39,39 +42,30 @@ class AdvertisementCell: UICollectionViewCell {
         return label
     }()
     
-    let categorieLabel: UILabel = {
+    private let categorieLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.lightGray
         label.font = .preferredFont(forTextStyle: .body)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-        
-    let isUrgentFlag: UIImageView = {
-        let imageView = UIImageView()
-        imageView.backgroundColor = .clear
-        imageView.image = .init(systemName: "light.beacon.max.fill")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.tintColor = .red
-        return imageView
-    }()
-
-    let globalStackView: UIStackView = {
+    
+    private let globalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis  = .horizontal
         stackView.alignment = .leading
         stackView.distribution = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = 10
+        stackView.spacing = Theme.Layout.interItemVerticalSpacing
         return stackView
     }()
     
-    let textsStackView: UIStackView = {
+    private let textsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis  = .vertical
         stackView.alignment = .leading
         stackView.distribution = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false;
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -79,28 +73,27 @@ class AdvertisementCell: UICollectionViewCell {
         super.init(frame: frame)
         addViews()
     }
-
-    func addViews(){
+    
+    private func addViews(){
         globalStackView.addArrangedSubview(adImageView)
         textsStackView.addArrangedSubview(titleLabel)
         textsStackView.addArrangedSubview(priceLabel)
         textsStackView.addArrangedSubview(categorieLabel)
-        textsStackView.addArrangedSubview(isUrgentFlag)
         globalStackView.addArrangedSubview(textsStackView)
         addSubview(globalStackView)
-        adImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        adImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        globalStackView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        globalStackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
-        globalStackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
-        globalStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
+        adImageView.heightAnchor.constraint(equalToConstant: Theme.Layout.listImageHeight).isActive = true
+        adImageView.widthAnchor.constraint(equalToConstant: Theme.Layout.listImageWidth).isActive = true
+        globalStackView.topAnchor.constraint(equalTo: topAnchor, constant: Theme.Layout.generalVerticalMargin).isActive = true
+        globalStackView.leftAnchor.constraint(equalTo: leftAnchor, constant: Theme.Layout.generalHorizontalMargin).isActive = true
+        globalStackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -Theme.Layout.generalHorizontalMargin).isActive = true
+        globalStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Theme.Layout.generalVerticalMargin).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupWith(_ ad: HomeCellData) {
+    func setupWith(_ ad: RichAdvertisement) {
         categorieLabel.text = ad.category.name
         titleLabel.text = ad.title
         let formatter = NumberFormatter()
@@ -108,11 +101,11 @@ class AdvertisementCell: UICollectionViewCell {
         let formattedValue = formatter.string(from: .init(floatLiteral: ad.price))
         priceLabel.text = formattedValue
         let placeHolderImage = UIImage(systemName: "photo")?.withTintColor(.lightGray)
-        if let url = ad.imagesURL.small {
+        if let url = ad.imagesURL.thumb {
             adImageView.loadImage(url, placeHolder: placeHolderImage)
         } else {
             adImageView.image = placeHolderImage
         }
-        isUrgentFlag.isHidden = !ad.isUrgent
+        backgroundColor = ad.isUrgent ? Theme.Color.urgentColor : Theme.Color.backgroundColor
     }
 }

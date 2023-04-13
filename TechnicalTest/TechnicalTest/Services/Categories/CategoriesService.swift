@@ -2,19 +2,14 @@
 //  CategoriesService.swift
 //  TechnicalTest
 //
-//  Created by compte temporaire on 08/04/2023.
+//  Created by Marouene on 08/04/2023.
 //  Copyright © 2023 Marouene. All rights reserved.
 //
 
 import Foundation
 import Combine
 
-class CategoriesService: CategoriesServiceProtocol {
-#warning("to remove and replace with DI")
-    static let shared: CategoriesServiceProtocol = CategoriesService()
-    
-    init() {}
-    
+class CategoriesService: CategoriesServiceProtocol {    
     func getCategories() -> AnyPublisher<[Category], Error> {
         guard let url = URL(string: ApiConstants.baseURL + ApiConstants.Paths.categories.rawValue) else {
             return Fail(error: ApiConstants.ServerError.malformattedURL).eraseToAnyPublisher()
