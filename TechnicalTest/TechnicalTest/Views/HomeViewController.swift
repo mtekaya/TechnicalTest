@@ -77,17 +77,21 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         activityIndicator.hidesWhenStopped = true
-
-
     }
     
     private func loadData() {
         activityIndicator.startAnimating()
         homeViewModel.getData()
             .receive(on: DispatchQueue.main)
-            .sink {[weak self] _ in
+            .sink {[weak self] completion in
                 self?.activityIndicator.stopAnimating()
-
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    self?.show(error)
+                }
+                
             } receiveValue: {[weak self] datas in
                 self?.activityIndicator.stopAnimating()
                 self?.applySnapshot(datas)
@@ -180,6 +184,27 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         let totalMargin: CGFloat = CGFloat(numberOfItem) * margin * 2
         let calculatedWidth: CGFloat = (width - totalMargin) / CGFloat(numberOfItem)
         return CGSizeMake(calculatedWidth, 120)
+    }
+    
+    private func show(_ error: Error) {
+        let alertController = UIAlertController(title: "error".localized(), message: error.localizedDescription, preferredStyle: .alert)
+        
+        let retryAction = UIAlertAction(title: "retry".localized(), style: .default, handler: { [weak self] _ in
+            self?.loadData()
+            //self.dismiss(animated: true)
+        })
+        let cancelAction = UIAlertAction(title: "cancel".localized(), style: .default, handler: { _ in
+            self.homeViewModel.setSortByDateAscendant(ascendant: false)
+            self.dismiss(animated: true)
+            
+        })
+        
+        alertController.addAction(retryAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+
+
     }
 }
 

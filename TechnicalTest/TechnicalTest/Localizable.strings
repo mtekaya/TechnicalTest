@@ -16,4 +16,5 @@
 "home.creation.date" = "Date de création";
 "siret" = "Siret:";
 "detail.creation.date.label" = "Date de création:";
-
+"error" = "Erreur";
+"retry" = "Réessayer";
