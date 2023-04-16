@@ -17,10 +17,11 @@ class CategoriesService: CategoriesServiceProtocol {
     
         return URLSession.shared.dataTaskPublisher(for: url)
             .tryMap { output in
-                print("New call categories")
-                guard let response = output.response as? HTTPURLResponse, response.statusCode == 200 else {
+                guard let response = output.response as? HTTPURLResponse,
+                        response.statusCode == 200 else {
                     throw ApiConstants.ServerError.noData
                 }
+                
                 return output.data
             }
             .decode(type: [Category].self, decoder: JSONDecoder())

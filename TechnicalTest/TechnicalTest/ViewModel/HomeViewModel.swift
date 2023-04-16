@@ -20,17 +20,19 @@ struct RichAdvertisement: Hashable {
 }
 
 protocol HomeViewModelProtocol {
-    func getCategories() -> AnyPublisher<[Category], Error>
+    func getCategories() -> CurrentValueSubject<[Category], Error>
     func getData() -> AnyPublisher<[RichAdvertisement], Error>
     func setcategory(selectedCategory: Int?)
     func setSortByDateAscendant(ascendant: Bool)
 }
 
 class HomeViewModel: HomeViewModelProtocol {
+    private var cancellables = Set<AnyCancellable>()
     private let categorieService: CategoriesServiceProtocol
     private let adsService: AdsServiceProtocol
     private let selectedCategory = CurrentValueSubject<Int?, Error>(nil)
     private let sortByDateAscendant = CurrentValueSubject<Bool, Error>(false)
+    private let categoriesSubject = CurrentValueSubject<[Category], Error>([])
     
     init(diContainer: DIContainer) {
         self.adsService = diContainer.adsService
@@ -45,15 +47,22 @@ class HomeViewModel: HomeViewModelProtocol {
         sortByDateAscendant.send(ascendant)
     }
 
+    func getCategories() -> CurrentValueSubject<[Category], Error> {
+        categoriesSubject
+    }
     
-    func getCategories() -> AnyPublisher<[Category], Error> {
+    private func getCategoriesPublisher() -> AnyPublisher<[Category], Error> {
         categorieService
             .getCategories()
+            .map { [weak self] categories in
+                self?.categoriesSubject.send(categories)
+                return categories
+            }.eraseToAnyPublisher()
     }
     
     func getData() -> AnyPublisher<[RichAdvertisement], Error> {
         return Publishers.CombineLatest4(
-            getCategories(),
+            getCategoriesPublisher(),
             adsService
                 .getAds(),
             selectedCategory,
