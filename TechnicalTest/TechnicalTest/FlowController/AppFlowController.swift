@@ -14,7 +14,8 @@ class AppFlowController: UINavigationController {
     func start() {
         let homeVC = HomeViewController(
             homeViewModel: HomeViewModel(
-                diContainer: diContainer
+                adsService: diContainer.adsService,
+                categoriesService: diContainer.categoriesService
             )
         )
         homeVC.delegate = self

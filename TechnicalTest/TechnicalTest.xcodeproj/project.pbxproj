@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8014F91929EE82C900DA96D5 /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8014F91829EE82C900DA96D5 /* HomeViewModelTests.swift */; };
+		8014F91A29EE897600DA96D5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B43629E0A9B40054B64D /* HomeViewController.swift */; };
+		8014F91B29EE897700DA96D5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B43629E0A9B40054B64D /* HomeViewController.swift */; };
+		8014F91C29EE899400DA96D5 /* AdvertisementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B4D229E54E060054B64D /* AdvertisementCell.swift */; };
+		8014F91D29EE899400DA96D5 /* AdvertisementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B4D229E54E060054B64D /* AdvertisementCell.swift */; };
 		8073B43329E0A9B40054B64D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B43229E0A9B40054B64D /* AppDelegate.swift */; };
 		8073B43529E0A9B40054B64D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B43429E0A9B40054B64D /* SceneDelegate.swift */; };
 		8073B43729E0A9B40054B64D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B43629E0A9B40054B64D /* HomeViewController.swift */; };
 		8073B43C29E0A9BA0054B64D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8073B43B29E0A9BA0054B64D /* Assets.xcassets */; };
 		8073B43F29E0A9BA0054B64D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8073B43D29E0A9BA0054B64D /* LaunchScreen.storyboard */; };
-		8073B44A29E0A9BA0054B64D /* TechnicalTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B44929E0A9BA0054B64D /* TechnicalTestTests.swift */; };
-		8073B45429E0A9BA0054B64D /* TechnicalTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B45329E0A9BA0054B64D /* TechnicalTestUITests.swift */; };
-		8073B45629E0A9BA0054B64D /* TechnicalTestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B45529E0A9BA0054B64D /* TechnicalTestUITestsLaunchTests.swift */; };
 		8073B4B129E211DE0054B64D /* AdsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B4A729E211DD0054B64D /* AdsServiceProtocol.swift */; };
 		8073B4B229E211DE0054B64D /* AdsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B4A729E211DD0054B64D /* AdsServiceProtocol.swift */; };
 		8073B4B329E211DE0054B64D /* AdsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B4A729E211DD0054B64D /* AdsServiceProtocol.swift */; };
@@ -70,6 +72,9 @@
 		80D8F92029EA103D00A411A4 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D8F91F29EA103D00A411A4 /* StringExtension.swift */; };
 		80D8F92129EA103D00A411A4 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D8F91F29EA103D00A411A4 /* StringExtension.swift */; };
 		80D8F92229EA103D00A411A4 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D8F91F29EA103D00A411A4 /* StringExtension.swift */; };
+		80EBE2D429EE8DFB00B7A8C6 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EBE2D329EE8DFB00B7A8C6 /* Mocks.swift */; };
+		80EBE2D529EEA52700B7A8C6 /* TechnicalTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B45329E0A9BA0054B64D /* TechnicalTestUITests.swift */; };
+		80EBE2D629EEA52A00B7A8C6 /* TechnicalTestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B45529E0A9BA0054B64D /* TechnicalTestUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +95,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8014F91829EE82C900DA96D5 /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
 		8073B42F29E0A9B40054B64D /* TechnicalTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TechnicalTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8073B43229E0A9B40054B64D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8073B43429E0A9B40054B64D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,7 +104,6 @@
 		8073B43E29E0A9BA0054B64D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8073B44029E0A9BA0054B64D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8073B44529E0A9BA0054B64D /* TechnicalTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TechnicalTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8073B44929E0A9BA0054B64D /* TechnicalTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnicalTestTests.swift; sourceTree = "<group>"; };
 		8073B44F29E0A9BA0054B64D /* TechnicalTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TechnicalTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8073B45329E0A9BA0054B64D /* TechnicalTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnicalTestUITests.swift; sourceTree = "<group>"; };
 		8073B45529E0A9BA0054B64D /* TechnicalTestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnicalTestUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -121,6 +126,7 @@
 		80D8F91729E9EDCD00A411A4 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		80D8F91B29EA0F7400A411A4 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		80D8F91F29EA103D00A411A4 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		80EBE2D329EE8DFB00B7A8C6 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,7 +200,8 @@
 		8073B44829E0A9BA0054B64D /* TechnicalTestTests */ = {
 			isa = PBXGroup;
 			children = (
-				8073B44929E0A9BA0054B64D /* TechnicalTestTests.swift */,
+				8014F91829EE82C900DA96D5 /* HomeViewModelTests.swift */,
+				80EBE2D329EE8DFB00B7A8C6 /* Mocks.swift */,
 			);
 			path = TechnicalTestTests;
 			sourceTree = "<group>";
@@ -453,9 +460,12 @@
 				8073B4B229E211DE0054B64D /* AdsServiceProtocol.swift in Sources */,
 				80D8F91929E9EDCD00A411A4 /* UIViewExtension.swift in Sources */,
 				8073B4E029E575590054B64D /* DIContainer.swift in Sources */,
+				80EBE2D429EE8DFB00B7A8C6 /* Mocks.swift in Sources */,
 				80D8F91529E89A4600A411A4 /* Theme.swift in Sources */,
-				8073B44A29E0A9BA0054B64D /* TechnicalTestTests.swift in Sources */,
+				8014F91929EE82C900DA96D5 /* HomeViewModelTests.swift in Sources */,
 				80D8F91129E7623C00A411A4 /* AdvertisementDetailViewController.swift in Sources */,
+				8014F91C29EE899400DA96D5 /* AdvertisementCell.swift in Sources */,
+				8014F91A29EE897600DA96D5 /* HomeViewController.swift in Sources */,
 				8073B4C729E211DE0054B64D /* Category.swift in Sources */,
 				8073B4BB29E211DE0054B64D /* CategoriesServiceProtocol.swift in Sources */,
 				8073B4B529E211DE0054B64D /* AdsService.swift in Sources */,
@@ -470,18 +480,20 @@
 				8073B4E529E576680054B64D /* AppFlowController.swift in Sources */,
 				80D8F91029E7623600A411A4 /* AdvertisementDetailViewModel.swift in Sources */,
 				8073B4E129E575590054B64D /* DIContainer.swift in Sources */,
+				80EBE2D629EEA52A00B7A8C6 /* TechnicalTestUITestsLaunchTests.swift in Sources */,
 				8073B4B629E211DE0054B64D /* AdsService.swift in Sources */,
 				8073B4C829E211DE0054B64D /* Category.swift in Sources */,
+				80EBE2D529EEA52700B7A8C6 /* TechnicalTestUITests.swift in Sources */,
 				8073B4C529E211DE0054B64D /* Image.swift in Sources */,
 				80D8F91A29E9EDCD00A411A4 /* UIViewExtension.swift in Sources */,
 				8073B4C229E211DE0054B64D /* Advertisement.swift in Sources */,
-				8073B45629E0A9BA0054B64D /* TechnicalTestUITestsLaunchTests.swift in Sources */,
 				8073B4BF29E211DE0054B64D /* CategoriesService.swift in Sources */,
 				8073B4D929E562D10054B64D /* HomeViewModel.swift in Sources */,
 				8073B4B929E211DE0054B64D /* ApiConstants.swift in Sources */,
 				8073B4DD29E565270054B64D /* ImageView+AsyncLoad.swift in Sources */,
 				8073B4BC29E211DE0054B64D /* CategoriesServiceProtocol.swift in Sources */,
-				8073B45429E0A9BA0054B64D /* TechnicalTestUITests.swift in Sources */,
+				8014F91D29EE899400DA96D5 /* AdvertisementCell.swift in Sources */,
+				8014F91B29EE897700DA96D5 /* HomeViewController.swift in Sources */,
 				8073B4B329E211DE0054B64D /* AdsServiceProtocol.swift in Sources */,
 				80D8F91229E7623C00A411A4 /* AdvertisementDetailViewController.swift in Sources */,
 				80D8F92229EA103D00A411A4 /* StringExtension.swift in Sources */,

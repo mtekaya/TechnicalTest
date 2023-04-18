@@ -28,15 +28,15 @@ protocol HomeViewModelProtocol {
 
 class HomeViewModel: HomeViewModelProtocol {
     private var cancellables = Set<AnyCancellable>()
-    private let categorieService: CategoriesServiceProtocol
     private let adsService: AdsServiceProtocol
+    private let categoriesService: CategoriesServiceProtocol
     private let selectedCategory = CurrentValueSubject<Int?, Error>(nil)
     private let sortByDateAscendant = CurrentValueSubject<Bool, Error>(false)
     private let categoriesSubject = CurrentValueSubject<[Category], Error>([])
     
-    init(diContainer: DIContainer) {
-        self.adsService = diContainer.adsService
-        self.categorieService = diContainer.categoriesService
+    init(adsService: AdsServiceProtocol, categoriesService: CategoriesServiceProtocol) {
+        self.adsService = adsService
+        self.categoriesService = categoriesService
     }
     
     func setcategory(selectedCategory: Int?) {
@@ -52,7 +52,7 @@ class HomeViewModel: HomeViewModelProtocol {
     }
     
     private func getCategoriesPublisher() -> AnyPublisher<[Category], Error> {
-        categorieService
+        categoriesService
             .getCategories()
             .map { [weak self] categories in
                 self?.categoriesSubject.send(categories)
