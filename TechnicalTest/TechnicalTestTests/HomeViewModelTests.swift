@@ -9,8 +9,8 @@ import XCTest
 import Combine
 
 final class HomeViewModelTests: XCTestCase {
-    private let adsService = AdsTestService()
-    private let categoriesService = CategoriesTestService()
+    private let adsService = _MockAdsTestService()
+    private let categoriesService = _MockCategoriesService()
     private var cancellables = Set<AnyCancellable>()
     private let expectation = XCTestExpectation(description: "Recieving data.")
     
@@ -23,17 +23,17 @@ final class HomeViewModelTests: XCTestCase {
         )
         
         categoriesService.setCategories([
-            Mocks.categorie1,
-            Mocks.categorie2,
-            Mocks.categorie3
+            _Mocks.categorie1,
+            _Mocks.categorie2,
+            _Mocks.categorie3
         ])
         adsService.setAdvertisement([
-            Mocks.advertisement1cat1,
-            Mocks.advertisement2cat1,
-            Mocks.advertisement3cat1,
-            Mocks.advertisement4cat2,
-            Mocks.advertisement5cat2,
-            Mocks.advertisement6cat2
+            _Mocks.advertisement1cat1,
+            _Mocks.advertisement2cat1,
+            _Mocks.advertisement3cat1,
+            _Mocks.advertisement4cat2,
+            _Mocks.advertisement5cat2,
+            _Mocks.advertisement6cat2
         ])
     }
    
@@ -120,31 +120,4 @@ final class HomeViewModelTests: XCTestCase {
     }
 }
 
-class AdsTestService: AdsServiceProtocol {
-    private var testAdvertissements: [Advertisement] = []
-    
-    func setAdvertisement(_ ads: [Advertisement]) {
-        testAdvertissements = ads
-    }
-    
-    func getAds() -> AnyPublisher<[Advertisement], Error> {
-        return Just(testAdvertissements)
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
-    }
-}
-
-class CategoriesTestService: CategoriesServiceProtocol {
-    private var testCategories: [Category] = []
-    
-    func setCategories(_ categories: [Category]) {
-        testCategories = categories
-    }
-    
-    func getCategories() -> AnyPublisher<[Category], Error> {
-        return Just(testCategories)
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
-    }
-}
 

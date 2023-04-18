@@ -18,9 +18,16 @@ class DIContainer {
     }
     
     static func create() -> DIContainer {
-        DIContainer(
-            categoriesService: CategoriesService(),
-            adsService: AdsService()
-        )
+        if StartupUtils.shouldRunWithMock() {
+            return DIContainer(
+                categoriesService: _MockCategoriesService(),
+                adsService: _MockAdsTestService()
+            )
+        } else {
+            return DIContainer(
+                categoriesService: CategoriesService(),
+                adsService: AdsService()
+            )
+        }
     }
 }

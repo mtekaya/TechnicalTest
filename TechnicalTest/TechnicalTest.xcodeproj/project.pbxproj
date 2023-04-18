@@ -12,6 +12,12 @@
 		8014F91B29EE897700DA96D5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B43629E0A9B40054B64D /* HomeViewController.swift */; };
 		8014F91C29EE899400DA96D5 /* AdvertisementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B4D229E54E060054B64D /* AdvertisementCell.swift */; };
 		8014F91D29EE899400DA96D5 /* AdvertisementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B4D229E54E060054B64D /* AdvertisementCell.swift */; };
+		802865D929EEB5BD006F3D7B /* _Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EBE2D329EE8DFB00B7A8C6 /* _Mocks.swift */; };
+		802865DA29EEB657006F3D7B /* AppFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B4E229E576680054B64D /* AppFlowController.swift */; };
+		802865DB29EEB72C006F3D7B /* _Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EBE2D329EE8DFB00B7A8C6 /* _Mocks.swift */; };
+		802865DD29EEB799006F3D7B /* StartupUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802865DC29EEB799006F3D7B /* StartupUtils.swift */; };
+		802865DE29EEB799006F3D7B /* StartupUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802865DC29EEB799006F3D7B /* StartupUtils.swift */; };
+		802865DF29EEB799006F3D7B /* StartupUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802865DC29EEB799006F3D7B /* StartupUtils.swift */; };
 		8073B43329E0A9B40054B64D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B43229E0A9B40054B64D /* AppDelegate.swift */; };
 		8073B43529E0A9B40054B64D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B43429E0A9B40054B64D /* SceneDelegate.swift */; };
 		8073B43729E0A9B40054B64D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B43629E0A9B40054B64D /* HomeViewController.swift */; };
@@ -53,7 +59,6 @@
 		8073B4E129E575590054B64D /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B4DE29E575590054B64D /* DIContainer.swift */; };
 		8073B4E329E576680054B64D /* AppFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B4E229E576680054B64D /* AppFlowController.swift */; };
 		8073B4E429E576680054B64D /* AppFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B4E229E576680054B64D /* AppFlowController.swift */; };
-		8073B4E529E576680054B64D /* AppFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B4E229E576680054B64D /* AppFlowController.swift */; };
 		80D8F90C29E760D000A411A4 /* AdvertisementDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D8F90B29E760D000A411A4 /* AdvertisementDetailViewController.swift */; };
 		80D8F90E29E7623600A411A4 /* AdvertisementDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D8F90D29E7623600A411A4 /* AdvertisementDetailViewModel.swift */; };
 		80D8F90F29E7623600A411A4 /* AdvertisementDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D8F90D29E7623600A411A4 /* AdvertisementDetailViewModel.swift */; };
@@ -72,7 +77,7 @@
 		80D8F92029EA103D00A411A4 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D8F91F29EA103D00A411A4 /* StringExtension.swift */; };
 		80D8F92129EA103D00A411A4 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D8F91F29EA103D00A411A4 /* StringExtension.swift */; };
 		80D8F92229EA103D00A411A4 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D8F91F29EA103D00A411A4 /* StringExtension.swift */; };
-		80EBE2D429EE8DFB00B7A8C6 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EBE2D329EE8DFB00B7A8C6 /* Mocks.swift */; };
+		80EBE2D429EE8DFB00B7A8C6 /* _Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EBE2D329EE8DFB00B7A8C6 /* _Mocks.swift */; };
 		80EBE2D529EEA52700B7A8C6 /* TechnicalTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B45329E0A9BA0054B64D /* TechnicalTestUITests.swift */; };
 		80EBE2D629EEA52A00B7A8C6 /* TechnicalTestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073B45529E0A9BA0054B64D /* TechnicalTestUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
@@ -96,6 +101,7 @@
 
 /* Begin PBXFileReference section */
 		8014F91829EE82C900DA96D5 /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
+		802865DC29EEB799006F3D7B /* StartupUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupUtils.swift; sourceTree = "<group>"; };
 		8073B42F29E0A9B40054B64D /* TechnicalTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TechnicalTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8073B43229E0A9B40054B64D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8073B43429E0A9B40054B64D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -126,7 +132,7 @@
 		80D8F91729E9EDCD00A411A4 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		80D8F91B29EA0F7400A411A4 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		80D8F91F29EA103D00A411A4 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
-		80EBE2D329EE8DFB00B7A8C6 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
+		80EBE2D329EE8DFB00B7A8C6 /* _Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Mocks.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +199,7 @@
 				80D8F91729E9EDCD00A411A4 /* UIViewExtension.swift */,
 				80D8F91B29EA0F7400A411A4 /* Localizable.strings */,
 				80D8F91F29EA103D00A411A4 /* StringExtension.swift */,
+				802865DC29EEB799006F3D7B /* StartupUtils.swift */,
 			);
 			path = TechnicalTest;
 			sourceTree = "<group>";
@@ -201,7 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				8014F91829EE82C900DA96D5 /* HomeViewModelTests.swift */,
-				80EBE2D329EE8DFB00B7A8C6 /* Mocks.swift */,
+				80EBE2D329EE8DFB00B7A8C6 /* _Mocks.swift */,
 			);
 			path = TechnicalTestTests;
 			sourceTree = "<group>";
@@ -427,11 +434,13 @@
 				8073B4B429E211DE0054B64D /* AdsService.swift in Sources */,
 				8073B4B729E211DE0054B64D /* ApiConstants.swift in Sources */,
 				8073B43329E0A9B40054B64D /* AppDelegate.swift in Sources */,
+				802865DD29EEB799006F3D7B /* StartupUtils.swift in Sources */,
 				8073B4B129E211DE0054B64D /* AdsServiceProtocol.swift in Sources */,
 				8073B4BA29E211DE0054B64D /* CategoriesServiceProtocol.swift in Sources */,
 				8073B4DF29E575590054B64D /* DIContainer.swift in Sources */,
 				8073B43529E0A9B40054B64D /* SceneDelegate.swift in Sources */,
 				80D8F91829E9EDCD00A411A4 /* UIViewExtension.swift in Sources */,
+				802865DB29EEB72C006F3D7B /* _Mocks.swift in Sources */,
 				8073B4DB29E565270054B64D /* ImageView+AsyncLoad.swift in Sources */,
 				80D8F90C29E760D000A411A4 /* AdvertisementDetailViewController.swift in Sources */,
 				8073B4D729E562D10054B64D /* HomeViewModel.swift in Sources */,
@@ -458,9 +467,10 @@
 				8073B4B829E211DE0054B64D /* ApiConstants.swift in Sources */,
 				80D8F92129EA103D00A411A4 /* StringExtension.swift in Sources */,
 				8073B4B229E211DE0054B64D /* AdsServiceProtocol.swift in Sources */,
+				802865DE29EEB799006F3D7B /* StartupUtils.swift in Sources */,
 				80D8F91929E9EDCD00A411A4 /* UIViewExtension.swift in Sources */,
 				8073B4E029E575590054B64D /* DIContainer.swift in Sources */,
-				80EBE2D429EE8DFB00B7A8C6 /* Mocks.swift in Sources */,
+				80EBE2D429EE8DFB00B7A8C6 /* _Mocks.swift in Sources */,
 				80D8F91529E89A4600A411A4 /* Theme.swift in Sources */,
 				8014F91929EE82C900DA96D5 /* HomeViewModelTests.swift in Sources */,
 				80D8F91129E7623C00A411A4 /* AdvertisementDetailViewController.swift in Sources */,
@@ -477,17 +487,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8073B4E529E576680054B64D /* AppFlowController.swift in Sources */,
 				80D8F91029E7623600A411A4 /* AdvertisementDetailViewModel.swift in Sources */,
 				8073B4E129E575590054B64D /* DIContainer.swift in Sources */,
 				80EBE2D629EEA52A00B7A8C6 /* TechnicalTestUITestsLaunchTests.swift in Sources */,
 				8073B4B629E211DE0054B64D /* AdsService.swift in Sources */,
 				8073B4C829E211DE0054B64D /* Category.swift in Sources */,
 				80EBE2D529EEA52700B7A8C6 /* TechnicalTestUITests.swift in Sources */,
+				802865DF29EEB799006F3D7B /* StartupUtils.swift in Sources */,
 				8073B4C529E211DE0054B64D /* Image.swift in Sources */,
 				80D8F91A29E9EDCD00A411A4 /* UIViewExtension.swift in Sources */,
 				8073B4C229E211DE0054B64D /* Advertisement.swift in Sources */,
+				802865DA29EEB657006F3D7B /* AppFlowController.swift in Sources */,
 				8073B4BF29E211DE0054B64D /* CategoriesService.swift in Sources */,
+				802865D929EEB5BD006F3D7B /* _Mocks.swift in Sources */,
 				8073B4D929E562D10054B64D /* HomeViewModel.swift in Sources */,
 				8073B4B929E211DE0054B64D /* ApiConstants.swift in Sources */,
 				8073B4DD29E565270054B64D /* ImageView+AsyncLoad.swift in Sources */,
@@ -702,7 +714,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = marouene.TechnicalTestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -721,7 +733,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = marouene.TechnicalTestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -739,6 +751,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = marouene.TechnicalTestUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -756,6 +769,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = marouene.TechnicalTestUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
